@@ -3,17 +3,21 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowRight, Code2, Laptop, MessageSquare, Rocket, Users } from "lucide-react"
+import { ArrowRight, Cat, Code2, Laptop, MessageSquare, Users } from "lucide-react"
+import { useTheme } from "next-themes"
+import { Waves } from "@/components/ui/waves-background"
 
 export default function Home() {
+  const { theme } = useTheme()
+
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
       <nav className="fixed w-full z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
         <div className="container flex h-16 items-center">
           <div className="mr-4 flex items-center">
-            <Rocket className="h-6 w-6 text-primary" />
-            <span className="ml-2 text-lg font-bold tracking-tight">Chatec</span>
+            <Cat className="h-6 w-6 text-primary" />
+            <span className="ml-2 text-lg font-bold tracking-tight">ChaTec</span>
           </div>
           <div className="flex flex-1 items-center justify-end space-x-4">
             <Button variant="ghost">ホーム</Button>
@@ -25,7 +29,24 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background/80">
+        {/* Interactive Waves Background */}
+        <div className="absolute inset-0">
+          <Waves
+            lineColor={theme === "dark" ? "rgba(255, 255, 255, 0.4)" : "rgba(236, 72, 153, 0.3)"}
+            backgroundColor="transparent"
+            waveSpeedX={0.001}
+            waveSpeedY={0.0008}
+            waveAmpX={25}
+            waveAmpY={18}
+            friction={0.99}
+            tension={0.002}
+            maxCursorMove={100}
+            xGap={25}
+            yGap={50}
+          />
+        </div>
+
         <div className="container relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -49,9 +70,9 @@ export default function Home() {
                 ビジネスを進化させる
               </span>
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-              最先端の技術と豊富な経験を活かし、お客様のビジネスに
-              最適なソリューションを提供します。
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-white">
+              最先端の技術と豊富な経験を活かし、<br />
+              お客様のビジネスに最適なソリューションを提供します。
             </p>
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
               <Button size="lg" className="bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:opacity-90">
@@ -65,8 +86,49 @@ export default function Home() {
           </motion.div>
         </div>
 
+        {/* Animated Floating Elements */}
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gradient-to-r from-pink-500/10 to-purple-500/10 blur-3xl"
+          animate={{
+            y: [0, -20, 0],
+            scale: [1, 1.2, 1],
+            rotate: [0, 45, 0]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/3 right-1/4 w-72 h-72 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-3xl"
+          animate={{
+            y: [0, 30, 0],
+            scale: [1.2, 1, 1.2],
+            rotate: [0, -45, 0]
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute top-1/2 right-1/3 w-56 h-56 rounded-full bg-gradient-to-r from-blue-500/10 to-pink-500/10 blur-3xl"
+          animate={{
+            y: [0, 15, 0],
+            scale: [1, 1.1, 1],
+            rotate: [0, 90, 0]
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+
         {/* Grid Background */}
-        <div 
+        <div
           className="absolute inset-0 -z-10"
           style={{
             backgroundImage: `linear-gradient(65deg, var(--grid-color) 1px, transparent 1px),
@@ -92,11 +154,11 @@ export default function Home() {
             className="text-center mb-12"
           >
             <span className="inline-block bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent font-medium mb-4">サービス</span>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
               ビジネスの課題を解決する<br />
               包括的なソリューション
             </h2>
-            <p className="mt-4 text-muted-foreground">
+            <p className="mt-4 text-gray-800">
               お客様のニーズに合わせた最適なソリューションを提供します
             </p>
           </motion.div>
@@ -132,7 +194,7 @@ export default function Home() {
           >
             <div>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">会社概要</h2>
-              <p className="mt-4 text-muted-foreground">
+              <p className="mt-4 text-white">
                 2020年の設立以来、私たちは革新的なソリューションを提供し続けています。
                 お客様のビジネスの成功を第一に考え、最高品質のサービスを提供することを使命としています。
               </p>
@@ -144,7 +206,7 @@ export default function Home() {
                     <span>お客様との長期的なパートナーシップ</span>
                   </li>
                   <li className="flex items-center">
-                    <Rocket className="h-5 w-5 mr-2 text-purple-500" />
+                    <Cat className="h-5 w-5 mr-2 text-purple-500" />
                     <span>技術革新への継続的な投資</span>
                   </li>
                   <li className="flex items-center">
@@ -176,8 +238,8 @@ export default function Home() {
             viewport={{ once: true }}
             className="max-w-2xl mx-auto text-center"
           >
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">お問い合わせ</h2>
-            <p className="mt-4 text-muted-foreground">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">お問い合わせ</h2>
+            <p className="mt-4 text-gray-800">
               ご質問やご相談がございましたら、お気軽にお問い合わせください。
               専門スタッフが丁寧にご対応させていただきます。
             </p>
@@ -196,12 +258,12 @@ export default function Home() {
         <div className="container py-8">
           <div className="flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
             <div className="flex items-center">
-              <Rocket className="h-6 w-6 text-pink-500" />
-              <p className="ml-2 text-sm">© 2024 Chatec. All rights reserved.</p>
+              <Cat className="h-6 w-6 text-pink-500" />
+              <p className="ml-2 text-sm"> 2025 ChaTec. All rights reserved.</p>
             </div>
             <div className="flex gap-4">
-              <Button variant="ghost" size="sm">プライバシーポリシー</Button>
-              <Button variant="ghost" size="sm">利用規約</Button>
+              <Button variant="ghost" size="sm"></Button>
+              <Button variant="ghost" size="sm"> </Button>
             </div>
           </div>
         </div>
@@ -221,10 +283,10 @@ function ServiceCard({ icon, title, description }: { icon: React.ReactNode; titl
       <Card className="border-none shadow-lg bg-white/50 backdrop-blur-sm hover:bg-white/80 transition-colors">
         <CardHeader>
           <div className="mb-4 flex items-center justify-center">{icon}</div>
-          <CardTitle className="text-xl text-center">{title}</CardTitle>
+          <CardTitle className="text-xl text-center text-gray-800">{title}</CardTitle>
         </CardHeader>
         <CardContent>
-          <CardDescription className="text-center text-base">{description}</CardDescription>
+          <CardDescription className="text-center text-base text-gray-600">{description}</CardDescription>
         </CardContent>
       </Card>
     </motion.div>
